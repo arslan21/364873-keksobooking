@@ -9,12 +9,19 @@
   var titleField = noticeForm.querySelector('#title');
   var priceField = noticeForm.querySelector('#price');
   var typeField = noticeForm.querySelector('#type');
-  var timeInField = noticeForm.querySelector('#timein');
-  var timeOutField = noticeForm.querySelector('#timeout');
+  var checkInField = noticeForm.querySelector('#timein');
+  var checkOutField = noticeForm.querySelector('#timeout');
   var roomNumberField = noticeForm.querySelector('#room_number');
   var capacityField = noticeForm.querySelector('#capacity');
 
   var submitForm = noticeForm.querySelector('.form__submit');
+
+  function deactivateNotice() {
+    noticeForm.classList.remove('notice__form--disabled');
+    for (var f = 0; f < noticeFields.length; f++) {
+      noticeFields[f].disabled = true;
+    }
+  }
 
   // Валидация полей
   function titleFieldValidation() {
@@ -91,7 +98,7 @@
     invalidFieldBordering(capacityFieldValidityState, capacityField);
   }
 
-  //  отправка формы
+  //  проверка отправки формы
   submitForm.addEventListener('click', function (evt) {
     submitingForm(evt);
   });
@@ -103,10 +110,21 @@
     if (allFieldValidation()) {
       evt.preventDefault();
       invalidFieldsMarking();
-      // alert('Заполните отмеченные поля');
-    } else {
-      noticeForm.submit();
     }
+  }
+  // отправка формы
+  noticeForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(noticeForm), resetNotice, window.errorMessage);
+    evt.preventDefault();
+  });
+
+  function resetNotice() {
+    noticeForm.reset();
+    noticeForm.classList.add('notice__form--disabled');
+    deactivateNotice();
+    window.card.closePopup();
+    window.map.removePins();
+    window.map.mapFaded();
   }
 
   window.form = {
@@ -139,13 +157,6 @@
       }
     },
 
-    setPriceRange: function () {
-      var type = typeField.options[typeField.selectedIndex].value;
-      var offerTypes = window.data.OFFER_TYPES;
-      priceField.min = offerTypes[type].minPrice;
-      priceField.max = offerTypes[type].maxPrice;
-    },
-
     initFields: function () {
       addressField.required = true;
       addressField.disabled = true;
@@ -156,19 +167,19 @@
         noticeFields[n].disabled = true;
       }
 
-      typeField.addEventListener('change', function () {
-        var type = typeField.options[typeField.selectedIndex].value;
-        window.form.setPriceRange(type);
-      });
+      var typeValues = [];
+      var minPrices = [];
+      var offerTypes = window.data.OFFER_TYPES;
+      for (var i = 0; i < typeField.options.length; i++) {
+        typeValues[i] = typeField.options[i].value;
+        minPrices[i] = offerTypes[typeValues[i]].minPrice;
+      }
+      window.synchronizeFields(typeField, priceField, typeValues, minPrices, window.syncValuesMin);
 
-      timeInField.addEventListener('change', function () {
-        var index = timeInField.selectedIndex;
-        timeOutField.selectedIndex = index;
-      });
-      timeOutField.addEventListener('change', function () {
-        var index = timeOutField.selectedIndex;
-        timeInField.selectedIndex = index;
-      });
+      var checkInValues = window.util.getValuesFromOptions(checkInField);
+      var checkOutValues = window.util.getValuesFromOptions(checkOutField);
+      window.synchronizeFields(checkInField, checkOutField, checkInValues, checkOutValues, window.syncValues);
+      window.synchronizeFields(checkOutField, checkInField, checkOutValues, checkInValues, window.syncValues);
 
       roomNumberField.addEventListener('change', function () {
         window.form.disabeledCapacityOptions();
