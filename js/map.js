@@ -5,39 +5,49 @@
   var mapPins = map.querySelector('.map__pins');
   var mapPinMain = map.querySelector('.map__pin--main');
 
-  function insertPins(hotelList) {
-    window.map.removePins();
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < hotelList.length; i++) {
-      var pinForInsert = window.pin.renderPin(hotelList[i]);
-      fragment.appendChild(pinForInsert);
-    }
-    mapPins.appendChild(fragment);
-  }
-
-  function getAddress(evt) {
-    var pinStyle = getComputedStyle(evt.currentTarget);
-    var afterPinStyle = getComputedStyle(evt.currentTarget, '::after');
-
-    var pinStyeLeft = parseInt(pinStyle.left, 10);
-    var pinStyeTop = parseInt(pinStyle.top, 10);
-    var pinStyeHeight = parseInt(pinStyle.height, 10);
-    var afterPinStyeHeight = parseInt(afterPinStyle.borderTopWidth, 10);
-
-    var mapPinMainX = pinStyeLeft;
-    var mapPinMainY = pinStyeTop + (pinStyeHeight + afterPinStyeHeight) / 2;
-
-    var address = 'x: ' + mapPinMainX + ', y: ' + mapPinMainY;
-    return address;
-  }
 
   window.map = {
     initialize: function () {
       mapPinMain.addEventListener('mouseup', function (evt) {
         map.classList.remove('map--faded');
-        window.backend.load(insertPins, window.errorMessage);
-        window.controller.placeNotice(evt, getAddress(evt));
+        window.filter.getFilterValues(window.backend.data);
+        // var hotelList = window.filter.sortedHotels;
+        window.map.insertPins();
+        window.controller.placeNotice(evt, window.map.getAddress(evt));
+        window.filter.active();
       });
+    },
+
+    getAddress: function () {
+      var pinStyle = getComputedStyle(mapPinMain);
+      var afterPinStyle = getComputedStyle(mapPinMain, '::after');
+
+      var pinStyeLeft = parseInt(pinStyle.left, 10);
+      var pinStyeTop = parseInt(pinStyle.top, 10);
+      var pinStyeHeight = parseInt(pinStyle.height, 10);
+      var afterPinStyeHeight = parseInt(afterPinStyle.borderTopWidth, 10);
+
+      var mapPinMainX = pinStyeLeft;
+      var mapPinMainY = pinStyeTop + (pinStyeHeight + afterPinStyeHeight) / 2;
+      var address = {
+        x: mapPinMainX,
+        y: mapPinMainY
+      };
+      return address;
+    },
+
+    insertPins: function () {
+      window.map.removePins();
+      var hotelList = window.filter.sortedHotels;
+      var fragment = document.createDocumentFragment();
+      for (var i = 0; i < hotelList.length; i++) {
+        var pinForInsert = window.pin.renderPin(hotelList[i]);
+        fragment.appendChild(pinForInsert);
+        if (i === 4) {
+          break;
+        }
+      }
+      mapPins.appendChild(fragment);
     },
 
     removePins: function () {
@@ -54,6 +64,5 @@
     mapFaded: function () {
       map.classList.add('map--faded');
     }
-
   };
 })();
