@@ -13,7 +13,7 @@
         window.filter.getFilterValues(window.backend.data);
         // var hotelList = window.filter.sortedHotels;
         window.map.insertPins();
-        window.controller.placeNotice(evt, window.map.getAddress(evt));
+        window.controller.placeNotice(evt, window.map.getAddress());
         window.filter.active();
       });
     },
@@ -26,7 +26,6 @@
       var pinStyeTop = parseInt(pinStyle.top, 10);
       var pinStyeHeight = parseInt(pinStyle.height, 10);
       var afterPinStyeHeight = parseInt(afterPinStyle.borderTopWidth, 10);
-
       var mapPinMainX = pinStyeLeft;
       var mapPinMainY = pinStyeTop + (pinStyeHeight + afterPinStyeHeight) / 2;
       var address = {

@@ -160,6 +160,8 @@
     initFields: function () {
       addressField.required = true;
       addressField.disabled = true;
+      window.form.setAddress();
+
       titleField.required = true;
       priceField.required = true;
 
