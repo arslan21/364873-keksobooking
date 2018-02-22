@@ -46,6 +46,7 @@
           break;
         }
       }
+      window.card.insertPicture();
       mapPins.appendChild(fragment);
     },
 

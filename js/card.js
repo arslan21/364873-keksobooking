@@ -59,6 +59,20 @@
       map.insertBefore(mapCardForShow, mapFiltersContainer);
     },
 
+    insertPicture: function() {
+      var picturesLinks = window.data.pictures;
+      var picturesList = mapCard.querySelector('.popup__pictures');
+      for (var i = 0; i < picturesLinks.length; i++) {
+        var picture = picturesList.querySelector('li');
+        var pictureClone = picture.cloneNode(true);
+        var pictureImage = pictureClone.querySelector('img');
+        pictureImage.src = picturesLinks[i];
+        pictureImage.width = 100;
+        pictureImage.height = 100;
+        picturesList.appendChild(pictureClone);
+      }
+    },
+
     closePopup: function () {
       templateCloseButton.removeEventListener('keydown', enterClosePopup);
       templateCloseButton.removeEventListener('click', window.card.closePopup);
