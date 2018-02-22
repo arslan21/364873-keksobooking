@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var LOAD_URL = 'https://1510.dump.academy/keksobooking/data';
-  var SAVE_URL = 'https://1510.dump.academy/keksobooking';
+  var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
+  var SAVE_URL = 'https://js.dump.academy/keksobooking';
 
   function setup(onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -14,7 +14,7 @@
       } else {
         onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
       }
-    });
+  });
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
