@@ -12,20 +12,22 @@
     document.querySelector('.canvas').remove();
   }
 
-  window.errorMessage = function (message) {
-    var canvas = document.createElement('canvas');
-    canvas.setAttribute('style', 'position: absolute; z-index: 100; width: 100%; height: 20px; left: 0; top: 100px;');
-    canvas.width = window.innerWidth;
-    canvas.height = 20;
+  window.errorMessage = {
+    showMessage: function (message) {
+      var canvas = document.createElement('canvas');
+      canvas.setAttribute('style', 'position: absolute; z-index: 100; width: 100%; height: 20px; left: 0; top: 100px;');
+      canvas.width = window.innerWidth;
+      canvas.height = 20;
 
-    canvas.classList.add('canvas');
-    var ctx = canvas.getContext('2d');
+      canvas.classList.add('canvas');
+      var ctx = canvas.getContext('2d');
 
-    renderMessage(ctx, message);
+      renderMessage(ctx, message);
 
-    var header = document.querySelector('.header');
-    document.body.insertBefore(canvas, header);
-    setTimeout(closeMessage, 4000);
+      var header = document.querySelector('.header');
+      document.body.insertBefore(canvas, header);
+      setTimeout(closeMessage, 4000);
+    }
   };
 
 })();

@@ -7,7 +7,7 @@
   var startAddress = {
     left: 50,
     top: 375
-  }
+  };
 
 
   window.map = {
@@ -70,7 +70,6 @@
     },
 
     setStartAddress: function () {
-      debugger
       mapPinMain.style.top = startAddress.top + 'px';
       mapPinMain.style.left = startAddress.left + '%';
     }

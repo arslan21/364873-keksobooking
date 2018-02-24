@@ -14,7 +14,6 @@
   var roomNumberField = noticeForm.querySelector('#room_number');
   var capacityField = noticeForm.querySelector('#capacity');
 
-  var submitForm = noticeForm.querySelector('.form__submit');
   var resetForm = noticeForm.querySelector('.form__reset');
 
   window.form = {
@@ -73,12 +72,12 @@
         typeValues[i] = typeField.options[i].value;
         minPrices[i] = offerTypes[typeValues[i]].minPrice;
       }
-      window.synchronizeFields(typeField, priceField, typeValues, minPrices, window.syncValuesMin);
+      window.synchronizeFields.synchronize(typeField, priceField, typeValues, minPrices, window.synchronizeFields.syncValuesMin);
 
       var checkInValues = window.util.getValuesFromOptions(checkInField);
       var checkOutValues = window.util.getValuesFromOptions(checkOutField);
-      window.synchronizeFields(checkInField, checkOutField, checkInValues, checkOutValues, window.syncValues);
-      window.synchronizeFields(checkOutField, checkInField, checkOutValues, checkInValues, window.syncValues);
+      window.synchronizeFields.synchronize(checkInField, checkOutField, checkInValues, checkOutValues, window.synchronizeFields.syncValues);
+      window.synchronizeFields.synchronize(checkOutField, checkInField, checkOutValues, checkInValues, window.synchronizeFields.syncValues);
 
       roomNumberField.addEventListener('change', function () {
         window.form.disabeledCapacityOptions();

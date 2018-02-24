@@ -59,7 +59,7 @@
       map.insertBefore(mapCardForShow, mapFiltersContainer);
     },
 
-    insertPicture: function() {
+    insertPicture: function () {
       var picturesLinks = window.data.pictures;
       var picturesList = mapCard.querySelector('.popup__pictures');
       for (var i = 0; i < picturesLinks.length; i++) {
@@ -67,8 +67,8 @@
         var pictureClone = picture.cloneNode(true);
         var pictureImage = pictureClone.querySelector('img');
         pictureImage.src = picturesLinks[i];
-        pictureImage.width = 100;
-        pictureImage.height = 100;
+        pictureImage.width = 50;
+        pictureImage.height = 50;
         picturesList.appendChild(pictureClone);
       }
     },

@@ -2,19 +2,13 @@
 (function () {
   var noticeBlock = document.querySelector('.notice');
   var noticeForm = noticeBlock.querySelector('.notice__form');
-  var noticeFields = noticeForm.querySelectorAll('fieldset');
 
   var addressField = noticeForm.querySelector('#address');
   var titleField = noticeForm.querySelector('#title');
   var priceField = noticeForm.querySelector('#price');
-  var typeField = noticeForm.querySelector('#type');
-  var checkInField = noticeForm.querySelector('#timein');
-  var checkOutField = noticeForm.querySelector('#timeout');
-  var roomNumberField = noticeForm.querySelector('#room_number');
   var capacityField = noticeForm.querySelector('#capacity');
 
   var submitForm = noticeForm.querySelector('.form__submit');
-  var resetForm = noticeForm.querySelector('.form_reset');
 
   // Валидация полей
   function titleFieldValidation() {
@@ -101,10 +95,10 @@
   }
 
   window.formValidation = {
-    submitValidForm: function() {
+    submitValidForm: function () {
       // отправка формы
       noticeForm.addEventListener('submit', function (evt) {
-        window.backend.save(new FormData(noticeForm), window.formReset.resetForm, window.errorMessage);
+        window.backend.save(new FormData(noticeForm), window.formReset.resetForm, window.errorMessage.showMessage());
         evt.preventDefault();
       });
 
@@ -114,11 +108,8 @@
       submitForm.addEventListener('keydown', function (evt) {
         window.util.isEnterEvent(evt, submitingForm);
       });
-
-
-
     }
 
-  }
+  };
 
 })();
