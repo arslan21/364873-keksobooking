@@ -13,6 +13,7 @@
       window.card.closePopup();
       window.map.removePins();
       window.map.mapFaded();
+      window.map.setStartAddress();
       window.form.setAddress();
     }
   }

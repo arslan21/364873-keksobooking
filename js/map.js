@@ -4,6 +4,10 @@
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   var mapPinMain = map.querySelector('.map__pin--main');
+  var startAddress = {
+    left: 50,
+    top: 375
+  }
 
 
   window.map = {
@@ -63,6 +67,12 @@
 
     mapFaded: function () {
       map.classList.add('map--faded');
+    },
+
+    setStartAddress: function () {
+      debugger
+      mapPinMain.style.top = startAddress.top + 'px';
+      mapPinMain.style.left = startAddress.left + '%';
     }
   };
 })();
