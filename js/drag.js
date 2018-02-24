@@ -18,7 +18,7 @@
   }
 
   function onMouseMove(moveEvt) {
-    if (moveEvt.pageX - diff.x > 0 && moveEvt.pageX - diff.x < 1200 && moveEvt.pageY - diff.y > 100 && moveEvt.pageY - diff.y < 500) {
+    if (moveEvt.pageX - diff.x > 0 && moveEvt.pageX - diff.x < 1200 && moveEvt.pageY - diff.y > 150 && moveEvt.pageY - diff.y < 500) {
       dragablePin.style.left = (moveEvt.pageX - diff.x) + 'px';
       dragablePin.style.top = (moveEvt.pageY - diff.y) + 'px';
     } else {
