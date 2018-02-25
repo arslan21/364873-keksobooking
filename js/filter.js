@@ -80,7 +80,7 @@
       window.filter.sortedHotels = [];
     },
 
-    active: function () {
+    activateFilters: function () {
       for (var i = 0; i < mapFilters.length; i++) {
         mapFilters[i].addEventListener('change', insertSortedPins);
       }

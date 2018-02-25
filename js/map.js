@@ -15,10 +15,9 @@
       mapPinMain.addEventListener('mouseup', function (evt) {
         map.classList.remove('map--faded');
         window.filter.getFilterValues(window.backend.data);
-        // var hotelList = window.filter.sortedHotels;
         window.map.insertPins();
         window.controller.placeNotice(evt, window.map.getAddress());
-        window.filter.active();
+        window.filter.activateFilters();
       });
     },
 
@@ -65,7 +64,7 @@
       }
     },
 
-    mapFaded: function () {
+    mapFading: function () {
       map.classList.add('map--faded');
     },
 

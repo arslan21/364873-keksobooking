@@ -11,7 +11,7 @@
       window.form.deactivateNotice();
       window.card.closePopup();
       window.map.removePins();
-      window.map.mapFaded();
+      window.map.mapFading();
       window.map.setStartAddress();
       window.form.setAddress();
     }
