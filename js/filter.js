@@ -64,7 +64,7 @@
 
   function insertSortedPins() {
     debounce(function () {
-      window.filter.getFilterValues(window.backend.data);
+      window.filter.getFilterValues(window.backend.loadData);
       window.map.insertPins();
     }, 500);
   }

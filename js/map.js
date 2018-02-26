@@ -14,7 +14,7 @@
     initialize: function () {
       mapPinMain.addEventListener('mouseup', function (evt) {
         map.classList.remove('map--faded');
-        window.filter.getFilterValues(window.backend.data);
+        window.filter.getFilterValues(window.backend.loadData);
         window.map.insertPins();
         window.controller.placeNotice(evt, window.map.getAddress());
         window.filter.activateFilters();
