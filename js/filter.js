@@ -64,7 +64,7 @@
 
   function insertSortedPins() {
     debounce(function () {
-      window.filter.getFilterValues(window.backend.loadData);
+      window.filter.getFilterValues(window.backend.data);
       window.map.insertPins();
     }, 500);
   }
@@ -76,10 +76,6 @@
   }
 
   window.filter = {
-    getSortedHotels: function () {
-      window.filter.sortedHotels = [];
-    },
-
     activateFilters: function () {
       for (var i = 0; i < mapFilters.length; i++) {
         mapFilters[i].addEventListener('change', insertSortedPins);
@@ -90,6 +86,9 @@
     },
 
     getFilterValues: function (hotelList) {
+      window.filter.sortedHotels = [];
+      window.filter.data = hotelList;
+
       var needHotelOffer = new NeedHotelOffer();
       var sortedHotels = hotelList.filter(function (hotel) {
         var hotelOffer = hotel.offer;
