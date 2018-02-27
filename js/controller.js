@@ -9,7 +9,7 @@
       window.form.activateNotice();
       window.drag.dragPin();
       window.form.setAddress();
-      window.form.disabeledCapacityOptions();
+      window.form.disabelingCapacityOptions();
     }
   };
 })();

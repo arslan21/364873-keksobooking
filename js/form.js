@@ -31,7 +31,7 @@
       }
     },
 
-    disabeledCapacityOptions: function () {
+    disabelingCapacityOptions: function () {
       var roomSelectedValue = roomNumberField.options[roomNumberField.selectedIndex].value;
       var capacityOptions = capacityField.options;
       for (var c = 0; c < capacityOptions.length; c++) {
@@ -80,7 +80,7 @@
       window.synchronizeFields.synchronize(checkOutField, checkInField, checkOutValues, checkInValues, window.synchronizeFields.syncValues);
 
       roomNumberField.addEventListener('change', function () {
-        window.form.disabeledCapacityOptions();
+        window.form.disabelingCapacityOptions();
       });
 
       window.formValidation.submitValidForm();
