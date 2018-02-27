@@ -64,16 +64,10 @@
 
   function insertSortedPins() {
     window.card.closePopup();
-    debounce(function () {
+    window.util.debounce(function () {
       window.filter.getFilterValues(window.filter.data);
       window.map.insertPins();
     }, 500);
-  }
-
-  function debounce(func, time) {
-    var prevTimer;
-    window.clearTimeout(prevTimer);
-    prevTimer = window.setTimeout(func, time);
   }
 
   window.filter = {

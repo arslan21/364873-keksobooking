@@ -5,30 +5,23 @@
   var ENTER_KEYCODE = 13;
 
   window.util = {
+    //используется в card.js
+    //используется в form-validation.js
+    //используется в pin.js
     isEnterEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE) {
         action(evt);
       }
     },
 
+    //используется в card.js
     isEscEvent: function (evt, action) {
       if (evt.keyCode === ESC_KEYCODE) {
         action(evt);
       }
     },
 
-    getRandomCeil: function (number) {
-      return Math.ceil(Math.random() * number);
-    },
-
-    getRandomFloor: function (minNumber, maxNumber) {
-      return Math.floor(minNumber + Math.random() * (maxNumber + 1 - minNumber));
-    },
-
-    getRandomElem: function (array) {
-      return array[Math.floor(Math.random() * array.length)];
-    },
-
+    //используется в form.js
     getValuesFromOptions: function (selectField) {
       var optionsValues = [];
       for (var i = 0; i < selectField.options.length; i++) {
@@ -37,6 +30,7 @@
       return optionsValues;
     },
 
+    //используется в card.js
     checkArray: function (array1, array2) {
       if (array1 < array2) {
         return false;
@@ -50,6 +44,7 @@
       return true;
     },
 
+    //используется в filter.js
     debounce: function (func, time) {
       var prevTimer;
       window.clearTimeout(prevTimer);
