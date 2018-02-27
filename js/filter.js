@@ -63,8 +63,9 @@
   }
 
   function insertSortedPins() {
+    window.card.closePopup();
     debounce(function () {
-      window.filter.getFilterValues(window.backend.data);
+      window.filter.getFilterValues(window.filter.data);
       window.map.insertPins();
     }, 500);
   }

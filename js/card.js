@@ -59,6 +59,14 @@
       map.insertBefore(mapCardForShow, mapFiltersContainer);
     },
 
+    removePicture: function () {
+      var picturesList = mapCard.querySelector('.popup__pictures');
+      var hotelImages = picturesList.querySelectorAll('.hotel-image');
+      for (var i = 0; i < hotelImages.length; i++) {
+        hotelImages[i].remove();
+      }
+    },
+
     insertPicture: function () {
       var picturesLinks = window.data.pictures;
       var picturesList = mapCard.querySelector('.popup__pictures');
@@ -66,6 +74,7 @@
         var picture = picturesList.querySelector('li');
         var pictureClone = picture.cloneNode(true);
         var pictureImage = pictureClone.querySelector('img');
+        pictureImage.classList.add('hotel-image');
         pictureImage.src = picturesLinks[i];
         pictureImage.width = 50;
         pictureImage.height = 50;
@@ -74,6 +83,7 @@
     },
 
     closePopup: function () {
+      window.card.removePicture();
       templateCloseButton.removeEventListener('keydown', enterClosePopup);
       templateCloseButton.removeEventListener('click', window.card.closePopup);
       if (map.querySelector('.popup')) {
