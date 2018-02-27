@@ -73,8 +73,8 @@
       for (var i = 0; i < picturesLinks.length; i++) {
         var picture = picturesList.querySelector('li');
         var pictureClone = picture.cloneNode(true);
+        pictureClone.classList.add('hotel-image');
         var pictureImage = pictureClone.querySelector('img');
-        pictureImage.classList.add('hotel-image');
         pictureImage.src = picturesLinks[i];
         pictureImage.width = 50;
         pictureImage.height = 50;
