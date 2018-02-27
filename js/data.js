@@ -2,6 +2,8 @@
 
 (function () {
 
+  //этот файл используется для вспомогательных данных (кментарий для проверяющего)
+
   window.data = {
     pictures: [
       'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
