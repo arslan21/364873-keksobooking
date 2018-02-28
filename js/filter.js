@@ -32,8 +32,6 @@
   var guestsFilter = map.querySelector('#housing-guests');
   var FeaturesFilterSet = map.querySelector('.map__filter-set');
 
-
-
   function NeedHotelOffer() {
     var guestsValue = guestsFilter.options[guestsFilter.selectedIndex].value;
     if (guestsValue !== 'any') {

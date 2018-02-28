@@ -23,11 +23,11 @@
     return featuresListPopup;
   }
 
-  function escClosePopup(evt) {
+  function onEscClosePopup(evt) {
     window.util.isEscEvent(evt, window.card.closePopup);
   }
 
-  function enterClosePopup(evt) {
+  function onEnterClosePopup(evt) {
     window.util.isEnterEvent(evt, window.card.closePopup);
   }
 
@@ -53,8 +53,8 @@
 
       var popupCloseButton = mapCardForShow.querySelector('.popup__close');
       popupCloseButton.addEventListener('click', window.card.closePopup);
-      popupCloseButton.addEventListener('keydown', enterClosePopup);
-      document.addEventListener('keydown', escClosePopup);
+      popupCloseButton.addEventListener('keydown', onEnterClosePopup);
+      document.addEventListener('keydown', onEscClosePopup);
 
       map.insertBefore(mapCardForShow, mapFiltersContainer);
     },
@@ -84,14 +84,14 @@
 
     closePopup: function () {
       window.card.removePicture();
-      templateCloseButton.removeEventListener('keydown', enterClosePopup);
+      templateCloseButton.removeEventListener('keydown', onEnterClosePopup);
       templateCloseButton.removeEventListener('click', window.card.closePopup);
       if (map.querySelector('.popup')) {
         map.querySelector('.popup').remove();
         var mapPinActive = mapPins.querySelector('.map__pin--active');
         mapPinActive.classList.remove('map__pin--active');
       }
-      document.removeEventListener('keydown', escClosePopup);
+      document.removeEventListener('keydown', onEscClosePopup);
     }
 
   };
