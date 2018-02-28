@@ -2,15 +2,9 @@
 
 (function () {
 
-  //  этот файл используется для вспомогательных данных (кментарий для проверяющего)
+  //  этот файл используется для вспомогательных данных
 
   window.data = {
-    pictures: [
-      'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-      'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-      'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
-    ],
-
     OFFER_TYPES: {
       flat: {
         name: 'Квартира',
@@ -28,7 +22,14 @@
         name: 'Дворец',
         minPrice: 10000,
       }
-    }
+    },
+
+    pictures: [
+      'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+      'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+      'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+    ]
+
   };
 
 })();

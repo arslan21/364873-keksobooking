@@ -1,19 +1,7 @@
 'use strict';
 
 (function () {
-  var map = document.querySelector('.map');
-  var mapFiltersContainer = map.querySelector('.map__filters-container');
-  var mapFilters = mapFiltersContainer.querySelectorAll('.map__filter');
-  var mapChekboxes = mapFiltersContainer.querySelectorAll('input');
-
-  var typeFilter = map.querySelector('#housing-type');
-  var priceFilter = map.querySelector('#housing-price');
-  var roomsFilter = map.querySelector('#housing-rooms');
-  var guestsFilter = map.querySelector('#housing-guests');
-  var FeaturesFilterSet = map.querySelector('.map__filter-set');
-
-
-  var priceRank = {
+  var PRICE_RANK = {
     'middle': {
       min: 10000,
       max: 50000
@@ -32,6 +20,19 @@
       max: 10000000
     }
   };
+
+  var map = document.querySelector('.map');
+  var mapFiltersContainer = map.querySelector('.map__filters-container');
+  var mapFilters = mapFiltersContainer.querySelectorAll('.map__filter');
+  var mapChekboxes = mapFiltersContainer.querySelectorAll('input');
+
+  var typeFilter = map.querySelector('#housing-type');
+  var priceFilter = map.querySelector('#housing-price');
+  var roomsFilter = map.querySelector('#housing-rooms');
+  var guestsFilter = map.querySelector('#housing-guests');
+  var FeaturesFilterSet = map.querySelector('.map__filter-set');
+
+
 
   function NeedHotelOffer() {
     var guestsValue = guestsFilter.options[guestsFilter.selectedIndex].value;
@@ -90,7 +91,7 @@
         return (needHotelOffer.type === 'any' || hotelOffer.type === needHotelOffer.type) &&
           (needHotelOffer.rooms === 'any' || hotelOffer.rooms === needHotelOffer.rooms) &&
           (needHotelOffer.guests === 'any' || hotelOffer.guests >= needHotelOffer.guests) &&
-          (needHotelOffer.price === 'any' || (hotelOffer.price >= priceRank[needHotelOffer.price].min && hotelOffer.price <= priceRank[needHotelOffer.price].max)) &&
+          (needHotelOffer.price === 'any' || (hotelOffer.price >= PRICE_RANK[needHotelOffer.price].min && hotelOffer.price <= PRICE_RANK[needHotelOffer.price].max)) &&
           (needHotelOffer.features.length === 0 || window.util.checkArray(hotelOffer.features, needHotelOffer.features));
       });
       window.filter.sortedHotels = sortedHotels;
