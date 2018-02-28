@@ -3,7 +3,7 @@
 (function () {
   var map = document.querySelector('.map');
   var mapFiltersContainer = map.querySelector('.map__filters-container');
-  var mapFilters = mapFiltersContainer.querySelectorAll('.map__filters');
+  var mapFilters = mapFiltersContainer.querySelectorAll('.map__filter');
   var mapChekboxes = mapFiltersContainer.querySelectorAll('input');
 
   var typeFilter = map.querySelector('#housing-type');
@@ -94,7 +94,15 @@
           (needHotelOffer.features.length === 0 || window.util.checkArray(hotelOffer.features, needHotelOffer.features));
       });
       window.filter.sortedHotels = sortedHotels;
-    }
+    },
 
+    resetFilters: function () {
+      mapFilters.forEach(function (item) {
+        item.options.selectedIndex = 0;
+      });
+      mapChekboxes.forEach(function (item) {
+        item.checked = false;
+      });
+    }
   };
 })();

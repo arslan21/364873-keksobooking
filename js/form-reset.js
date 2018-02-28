@@ -10,6 +10,7 @@
       noticeForm.classList.add('notice__form--disabled');
       window.form.deactivateNotice();
       window.card.closePopup();
+      window.filter.resetFilters();
       window.map.removePins();
       window.map.mapFading();
       window.map.setStartAddress();
