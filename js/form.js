@@ -25,7 +25,7 @@
     },
 
     deactivateNotice: function () {
-      noticeForm.classList.remove('notice__form--disabled');
+      noticeForm.classList.add('notice__form--disabled');
       for (var f = 0; f < noticeFields.length; f++) {
         noticeFields[f].disabled = true;
       }
