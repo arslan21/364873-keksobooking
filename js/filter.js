@@ -61,30 +61,31 @@
     this.features = featuresNeed;
   }
 
-  function insertSortedPins() {
-    window.card.closePopup();
-    window.util.debounce(function () {
-      window.filter.getFilterValues(window.filter.data);
-      window.map.insertPins();
-    }, 500);
-  }
-
   window.filter = {
     activateFilters: function () {
       for (var i = 0; i < mapFilters.length; i++) {
-        mapFilters[i].addEventListener('change', insertSortedPins);
+        mapFilters[i].addEventListener('change', function () {
+          window.backend.load(window.filter.loadData, window.errorMessage);
+        });
       }
       for (var j = 0; j < mapChekboxes.length; j++) {
-        mapChekboxes[j].addEventListener('change', insertSortedPins);
+        mapChekboxes[j].addEventListener('change', function () {
+          window.backend.load(window.filter.loadData, window.errorMessage);
+        });
       }
     },
 
-    getFilterValues: function (hotelList) {
-      window.filter.sortedHotels = [];
+    loadData: function (hotelList) {
       window.filter.data = hotelList;
+      window.filter.getFilterValues();
+    },
+
+    getFilterValues: function () {
+      var sortedHotels = {};
+      var hotelList = window.filter.data;
 
       var needHotelOffer = new NeedHotelOffer();
-      var sortedHotels = hotelList.filter(function (hotel) {
+      sortedHotels = hotelList.filter(function (hotel) {
         var hotelOffer = hotel.offer;
         return (needHotelOffer.type === 'any' || hotelOffer.type === needHotelOffer.type) &&
           (needHotelOffer.rooms === 'any' || hotelOffer.rooms === needHotelOffer.rooms) &&
@@ -92,7 +93,7 @@
           (needHotelOffer.price === 'any' || (hotelOffer.price >= PRICE_RANK[needHotelOffer.price].min && hotelOffer.price <= PRICE_RANK[needHotelOffer.price].max)) &&
           (needHotelOffer.features.length === 0 || window.util.checkArray(hotelOffer.features, needHotelOffer.features));
       });
-      window.filter.sortedHotels = sortedHotels;
+      window.filter.insertSortedPins(sortedHotels);
     },
 
     resetFilters: function () {
@@ -102,6 +103,14 @@
       mapChekboxes.forEach(function (item) {
         item.checked = false;
       });
+    },
+
+    insertSortedPins: function (sortedHotels) {
+      window.card.closePopup();
+      window.util.debounce(function () {
+        window.map.insertPins(sortedHotels);
+      }, 500);
     }
+
   };
 })();

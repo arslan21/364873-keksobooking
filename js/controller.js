@@ -7,7 +7,6 @@
   window.controller = {
     placeNotice: function () {
       window.form.activateNotice();
-      window.drag.dragPin();
       window.form.setAddress();
       window.form.disabelingCapacityOptions();
     }

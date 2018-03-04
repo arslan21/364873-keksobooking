@@ -9,13 +9,12 @@
     top: 375
   };
 
-
   window.map = {
     initialize: function () {
+      window.drag.dragPin();
       mapPinMain.addEventListener('mouseup', function (evt) {
         map.classList.remove('map--faded');
-        window.filter.getFilterValues(window.filter.data);
-        window.map.insertPins();
+        window.backend.load(window.filter.loadData, window.errorMessage);
         window.controller.placeNotice(evt, window.map.getAddress());
         window.filter.activateFilters();
       });
@@ -38,12 +37,11 @@
       return address;
     },
 
-    insertPins: function () {
+    insertPins: function (sortedHotels) {
       window.map.removePins();
-      var hotelList = window.filter.sortedHotels;
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < hotelList.length; i++) {
-        var pinForInsert = window.pin.renderPin(hotelList[i]);
+      for (var i = 0; i < sortedHotels.length; i++) {
+        var pinForInsert = window.pin.renderPin(sortedHotels[i]);
         fragment.appendChild(pinForInsert);
         if (i === 4) {
           break;
