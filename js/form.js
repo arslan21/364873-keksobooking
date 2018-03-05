@@ -16,41 +16,56 @@
 
   var resetForm = noticeForm.querySelector('.form__reset');
 
-  window.form = {
-    activateNotice: function () {
-      noticeForm.classList.remove('notice__form--disabled');
-      for (var f = 0; f < noticeFields.length; f++) {
-        noticeFields[f].disabled = false;
-      }
-    },
+  function activateNotice() {
+    noticeForm.classList.remove('notice__form--disabled');
+    for (var f = 0; f < noticeFields.length; f++) {
+      noticeFields[f].disabled = false;
+    }
+  }
 
-    deactivateNotice: function () {
-      noticeForm.classList.add('notice__form--disabled');
-      for (var f = 0; f < noticeFields.length; f++) {
-        noticeFields[f].disabled = true;
-      }
-    },
+  function deactivateNotice() {
+    noticeForm.classList.add('notice__form--disabled');
+    for (var f = 0; f < noticeFields.length; f++) {
+      noticeFields[f].disabled = true;
+    }
+  }
 
-    disabelingCapacityOptions: function () {
-      var roomSelectedValue = roomNumberField.options[roomNumberField.selectedIndex].value;
-      var capacityOptions = capacityField.options;
-      for (var c = 0; c < capacityOptions.length; c++) {
-        capacityOptions[c].disabled = false;
-        for (var j = 0; j < capacityOptions.length; j++) {
-          if (roomSelectedValue !== '100') {
-            if (roomSelectedValue < capacityOptions[j].value) {
-              capacityOptions[j].disabled = true;
-            }
-            if (capacityOptions[j].value === '0') {
-              capacityOptions[j].disabled = true;
-            }
-          } else {
-            if (capacityOptions[j].value > '0') {
-              capacityOptions[j].disabled = true;
-            }
+  function disabelingCapacityOptions () {
+    var roomSelectedValue = roomNumberField.options[roomNumberField.selectedIndex].value;
+    var capacityOptions = capacityField.options;
+    for (var c = 0; c < capacityOptions.length; c++) {
+      capacityOptions[c].disabled = false;
+      for (var j = 0; j < capacityOptions.length; j++) {
+        if (roomSelectedValue !== '100') {
+          if (roomSelectedValue < capacityOptions[j].value) {
+            capacityOptions[j].disabled = true;
+          }
+          if (capacityOptions[j].value === '0') {
+            capacityOptions[j].disabled = true;
+          }
+        } else {
+          if (capacityOptions[j].value > '0') {
+            capacityOptions[j].disabled = true;
           }
         }
       }
+    }
+  }
+
+  window.form = {
+
+    placeNotice: function () {
+      activateNotice();
+      window.form.setAddress();
+      disabelingCapacityOptions();
+    },
+
+    setAddress: function () {
+      var address = window.map.getAddress();
+      addressField.value = 'x:' + address.x + ' y:' + address.y;
+
+      addressField.disabled = false;
+      addressField.readOnly = true;
     },
 
     initFields: function () {
@@ -80,20 +95,12 @@
       window.synchronizeFields.synchronize(checkOutField, checkInField, checkOutValues, checkInValues, window.synchronizeFields.syncValues);
 
       roomNumberField.addEventListener('change', function () {
-        window.form.disabelingCapacityOptions();
+        disabelingCapacityOptions();
       });
 
       window.formValidation.submitValidForm();
       resetForm.addEventListener('click', window.formReset.resetForm);
-
-    },
-
-    setAddress: function () {
-      var address = window.map.getAddress();
-      addressField.value = 'x:' + address.x + ' y:' + address.y;
-
-      addressField.disabled = false;
-      addressField.readOnly = true;
+      window.map.initialize();
     }
 
   };
