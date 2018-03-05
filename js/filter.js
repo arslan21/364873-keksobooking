@@ -64,16 +64,16 @@
   }
 
   window.filter = {
-    activateFilters: function () {
+    activate: function () {
       for (var i = 0; i < mapFilters.length; i++) {
-        mapFilters[i].addEventListener('change', window.filter.getFilterValues);
+        mapFilters[i].addEventListener('change', window.filter.getValues);
       }
       for (var j = 0; j < mapChekboxes.length; j++) {
-        mapChekboxes[j].addEventListener('change', window.filter.getFilterValues);
+        mapChekboxes[j].addEventListener('change', window.filter.getValues);
       }
     },
 
-    getFilterValues: function () {
+    getValues: function () {
       var sortedHotels = {};
       var hotelList = window.map.data;
 
@@ -89,7 +89,7 @@
       window.filter.insertSortedPins(sortedHotels);
     },
 
-    resetFilters: function () {
+    reset: function () {
       mapFilters.forEach(function (item) {
         item.options.selectedIndex = 0;
       });

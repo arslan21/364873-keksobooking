@@ -82,14 +82,14 @@
           window.backend.load(window.map.activate, window.errorMessage.show);
         }
         window.form.placeNotice(evt, window.map.getAddress());
-        window.filter.activateFilters();
+        window.filter.activate();
       });
     },
 
     activate: function (hotelList) {
       map.classList.remove('map--faded');
       window.map.data = hotelList;
-      window.filter.getFilterValues();
+      window.filter.getValues();
     },
 
     getAddress: function () {
