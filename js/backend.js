@@ -7,6 +7,7 @@
   function setup(onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
+    xhr.timeout = 10000;
 
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
@@ -20,7 +21,6 @@
       xhr.addEventListener('timeout', function () {
         onError('Запрос не успел cвыполниться за ' + xhr.timeout + 'мс');
       });
-      xhr.timeout = 10000;
     });
 
     return xhr;
