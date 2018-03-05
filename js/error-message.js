@@ -5,14 +5,24 @@
   var canvasSize = {
     width: window.innerWidth,
     height: 20
-  }
+  };
+  var textFill = {
+    fontWeight: 10,
+    fontSize: 10
+  };
+  var rectFill = {
+    x: 0,
+    y: 0,
+    width: 2000,
+    height: 50
+  };
 
 
   function renderMessage(ctx, message) {
     ctx.fillStyle = 'red';
-    ctx.fillRect(0, 0, 2000, 50);
+    ctx.fillRect(rectFill.x, rectFill.y, rectFill.width, rectFill.height);
     ctx.fillStyle = 'white';
-    ctx.fillText(message, 10, 10);
+    ctx.fillText(message, textFill.fontWeight, textFill.fontSize);
   }
 
   function closeMessage() {

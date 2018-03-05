@@ -21,6 +21,8 @@
     }
   };
 
+  var filterDebounce = 500;
+
   var map = document.querySelector('.map');
   var mapFiltersContainer = map.querySelector('.map__filters-container');
   var mapFilters = mapFiltersContainer.querySelectorAll('.map__filter');
@@ -100,7 +102,7 @@
       window.card.closePopup();
       window.util.debounce(function () {
         window.map.insertPins(sortedHotels);
-      }, 500);
+      }, filterDebounce);
     }
 
   };
