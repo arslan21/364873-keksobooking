@@ -98,7 +98,7 @@
     submitValidForm: function () {
       // отправка формы
       noticeForm.addEventListener('submit', function (evt) {
-        window.backend.save(noticeForm, window.formReset.resetForm, window.errorMessage.showMessage);
+        window.backend.save(noticeForm, window.formReset.resetForm, window.errorMessage.show);
         evt.preventDefault();
       });
 

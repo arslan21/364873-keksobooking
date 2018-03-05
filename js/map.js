@@ -14,7 +14,7 @@
       window.drag.dragPin();
       mapPinMain.addEventListener('mouseup', function (evt) {
         map.classList.remove('map--faded');
-        window.backend.load(window.filter.loadData, window.errorMessage);
+        window.backend.load(window.filter.loadData, window.errorMessage.show);
         window.controller.placeNotice(evt, window.map.getAddress());
         window.filter.activateFilters();
       });

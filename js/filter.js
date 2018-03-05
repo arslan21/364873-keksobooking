@@ -65,12 +65,12 @@
     activateFilters: function () {
       for (var i = 0; i < mapFilters.length; i++) {
         mapFilters[i].addEventListener('change', function () {
-          window.backend.load(window.filter.loadData, window.errorMessage);
+          window.backend.load(window.filter.loadData, window.errorMessage.show);
         });
       }
       for (var j = 0; j < mapChekboxes.length; j++) {
         mapChekboxes[j].addEventListener('change', function () {
-          window.backend.load(window.filter.loadData, window.errorMessage);
+          window.backend.load(window.filter.loadData, window.errorMessage.show);
         });
       }
     },
