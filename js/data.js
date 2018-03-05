@@ -2,7 +2,7 @@
 
 (function () {
 
-  //  этот файл используется для вспомогательных данных
+  //  этот файл приходится оставлять т.к. к объекту OFFER_TYPES обращаются form.js и card.js
 
   window.data = {
     OFFER_TYPES: {
@@ -22,14 +22,7 @@
         name: 'Дворец',
         minPrice: 10000,
       }
-    },
-
-    pictures: [
-      'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-      'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-      'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
-    ]
-
+    }
   };
 
 })();
