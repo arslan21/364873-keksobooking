@@ -16,7 +16,6 @@
       map.querySelector('.popup').remove();
     }
     evt.currentTarget.classList.add('map__pin--active');
-    window.card.insertPicture();
   }
 
   window.pin = {

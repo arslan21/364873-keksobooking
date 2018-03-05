@@ -31,6 +31,20 @@
     window.util.isEnterEvent(evt, window.card.closePopup);
   }
 
+  function insertPictures(offerPhotosList, mapCardForShow) {
+    var picturesList = mapCardForShow.querySelector('.popup__pictures');
+    var picture = picturesList.querySelector('li');
+    var fragment = document.createDocumentFragment();
+    offerPhotosList.forEach(function (offerPhoto) {
+      var pictureTemplate = picture.cloneNode(true);
+      var pictureImage = pictureTemplate.querySelector('img');
+      pictureImage.src = offerPhoto;
+      pictureImage.width = 50;
+      pictureImage.height = 50;
+      fragment.appendChild(pictureTemplate);
+    });
+    picturesList.appendChild(fragment);
+  }
 
   window.card = {
     getMapCard: function (hotel) {
@@ -51,6 +65,9 @@
       mapCardForShow.querySelector('p:nth-of-type(5)').textContent = hotel.offer.description;
       mapCardForShow.querySelector('.popup__avatar').setAttribute('src', hotel.author.avatar);
 
+      var offerPhotosList = hotel.offer.photos;
+      insertPictures(offerPhotosList, mapCardForShow);
+
       var popupCloseButton = mapCardForShow.querySelector('.popup__close');
       popupCloseButton.addEventListener('click', window.card.closePopup);
       popupCloseButton.addEventListener('keydown', onEnterClosePopup);
@@ -59,31 +76,7 @@
       map.insertBefore(mapCardForShow, mapFiltersContainer);
     },
 
-    removePicture: function () {
-      var picturesList = mapCard.querySelector('.popup__pictures');
-      var hotelImages = picturesList.querySelectorAll('.hotel-image');
-      for (var i = 0; i < hotelImages.length; i++) {
-        hotelImages[i].remove();
-      }
-    },
-
-    insertPicture: function () {
-      var picturesLinks = window.data.pictures;
-      var picturesList = mapCard.querySelector('.popup__pictures');
-      for (var i = 0; i < picturesLinks.length; i++) {
-        var picture = picturesList.querySelector('li');
-        var pictureClone = picture.cloneNode(true);
-        pictureClone.classList.add('hotel-image');
-        var pictureImage = pictureClone.querySelector('img');
-        pictureImage.src = picturesLinks[i];
-        pictureImage.width = 50;
-        pictureImage.height = 50;
-        picturesList.appendChild(pictureClone);
-      }
-    },
-
     closePopup: function () {
-      window.card.removePicture();
       templateCloseButton.removeEventListener('keydown', onEnterClosePopup);
       templateCloseButton.removeEventListener('click', window.card.closePopup);
       if (map.querySelector('.popup')) {
