@@ -76,7 +76,6 @@
 
   //  проверка отправки формы
   function allFieldValidation() {
-    debugger
     var validState;
     for (var field in fields) {
       if (fields.hasOwnProperty(field)) {

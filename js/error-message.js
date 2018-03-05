@@ -21,8 +21,6 @@
 
   window.errorMessage = {
     show: function (message) {
-      debugger
-
       var canvas = document.createElement('canvas');
       canvas.setAttribute('style', 'position: absolute; z-index: 100; width: 100%; height: 20px; left: 0; top: 100px;');
       canvas.width = canvasSize.width;

@@ -62,7 +62,7 @@
 
     setAddress: function () {
       var address = window.map.getAddress();
-      addressField.value = 'x:' + address.x + ' y:' + address.y;
+      addressField.value = 'x: ' + address.x + ' y: ' + address.y;
 
       addressField.disabled = false;
       addressField.readOnly = true;
@@ -100,7 +100,6 @@
 
       window.validation.submitForm();
       resetForm.addEventListener('click', window.form.reset);
-      // resetForm.addEventListener('keydown', window.util.isEnterEvent(evt, window.form.reset));
       window.map.initialize();
     },
 
