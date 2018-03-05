@@ -32,7 +32,7 @@
   var guestsFilter = map.querySelector('#housing-guests');
   var FeaturesFilterSet = map.querySelector('.map__filter-set');
 
-  functgetNeedHotelOffer() {
+  function NeedHotelOffer() {
     var guestsValue = guestsFilter.options[guestsFilter.selectedIndex].value;
     if (guestsValue !== 'any') {
       guestsValue = parseInt(guestsValue, 10);
@@ -84,7 +84,7 @@
       var sortedHotels = {};
       var hotelList = window.filter.data;
 
-      var needHotelOffer = getNeedHotelOffer();
+      var needHotelOffer = new NeedHotelOffer();
       sortedHotels = hotelList.filter(function (hotel) {
         var hotelOffer = hotel.offer;
         return (needHotelOffer.type === 'any' || hotelOffer.type === needHotelOffer.type) &&

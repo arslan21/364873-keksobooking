@@ -9,7 +9,6 @@
     top: 375
   };
 
-  var mapPinMain = document.querySelector('.map__pin--main');
   var startCoords = {};
   var diff = {};
 
@@ -42,7 +41,7 @@
     mapPinMain.removeEventListener('mouseup', onMouseUp);
   }
 
-  function dragPin () {
+  function dragPin() {
     mapPinMain.addEventListener('mousedown', function (evt) {
       evt.preventDefault();
       getCoords(evt);
