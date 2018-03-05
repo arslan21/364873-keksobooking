@@ -9,6 +9,7 @@
   var afterMainPinStyle = getComputedStyle(mapPinMain, '::after');
   var mapPinMainCSSDiff = getCSSdiff(mainPinStyle, afterMainPinStyle);
 
+  var numnerPins = 5;
 
   var startAddress = {
     left: 50,
@@ -107,12 +108,9 @@
     insertPins: function (sortedHotels) {
       window.map.removePins();
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < sortedHotels.length; i++) {
+      for (var i = 0; i < numnerPins; i++) {
         var pinForInsert = window.pin.render(sortedHotels[i]);
         fragment.appendChild(pinForInsert);
-        if (i === 4) {
-          break;
-        }
       }
       mapPins.appendChild(fragment);
     },
