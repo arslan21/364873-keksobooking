@@ -4,9 +4,25 @@
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   var mapPinMain = map.querySelector('.map__pin--main');
+
+  var mainPinStyle = getComputedStyle(mapPinMain);
+  var afterMainPinStyle = getComputedStyle(mapPinMain, '::after');
+  var mapPinMainCSSDiff = getCSSdiff(mainPinStyle, afterMainPinStyle);
+
+
   var startAddress = {
     left: 50,
     top: 375
+  };
+
+  var mapX = {
+    min: 0,
+    max: 1200
+  };
+
+  var mapY = {
+    min: 150,
+    max: 500
   };
 
   var startCoords = {};
@@ -24,8 +40,15 @@
     };
   }
 
+  function getCSSdiff(style, afterStyle) {
+    var cssDiff = {};
+    cssDiff.y = window.util.getTranslateY(style) + window.util.getTranslateY(afterStyle) + parseInt(afterStyle.borderTopWidth, 10);
+    cssDiff.x = 0;
+    return cssDiff;
+  }
+
   function onMouseMove(moveEvt) {
-    if (moveEvt.pageX - diff.x > 0 && moveEvt.pageX - diff.x < 1200 && moveEvt.pageY - diff.y > 150 && moveEvt.pageY - diff.y < 500) {
+    if (moveEvt.pageX - diff.x > mapX.min && moveEvt.pageX - diff.x < mapX.max && moveEvt.pageY - diff.y > mapY.min + mapPinMainCSSDiff.y && moveEvt.pageY - diff.y < mapY.max + mapPinMainCSSDiff.y) {
       mapPinMain.style.left = (moveEvt.pageX - diff.x) + 'px';
       mapPinMain.style.top = (moveEvt.pageY - diff.y) + 'px';
     } else {
@@ -70,15 +93,10 @@
     },
 
     getAddress: function () {
-      var pinStyle = getComputedStyle(mapPinMain);
-      var afterPinStyle = getComputedStyle(mapPinMain, '::after');
-
-      var pinStyeLeft = parseInt(pinStyle.left, 10);
-      var pinStyeTop = parseInt(pinStyle.top, 10);
-      var pinStyeHeight = parseInt(pinStyle.height, 10);
-      var afterPinStyeHeight = parseInt(afterPinStyle.borderTopWidth, 10);
-      var mapPinMainX = pinStyeLeft;
-      var mapPinMainY = pinStyeTop + (pinStyeHeight + afterPinStyeHeight) / 2;
+      var pinStyeLeft = parseInt(mainPinStyle.left, 10);
+      var pinStyeTop = parseInt(mainPinStyle.top, 10);
+      var mapPinMainX = pinStyeLeft - mapPinMainCSSDiff.x;
+      var mapPinMainY = pinStyeTop - mapPinMainCSSDiff.y;
       var address = {
         x: mapPinMainX,
         y: mapPinMainY

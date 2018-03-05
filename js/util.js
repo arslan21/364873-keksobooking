@@ -49,6 +49,11 @@
       var timeotID;
       window.clearTimeout(timeotID);
       timeotID = window.setTimeout(func, time);
+    },
+
+    getTranslateY: function (style) {
+      var translateY = parseInt(style.transform.replace(/[^0-9\-.,]/g, '').split(',')[5], 10);
+      return translateY;
     }
 
   };
