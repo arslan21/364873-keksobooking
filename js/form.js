@@ -1,6 +1,26 @@
 'use strict';
 
 (function () {
+
+  var OFFER_TYPES = {
+    flat: {
+      name: 'Квартира',
+      minPrice: 1000,
+    },
+    bungalo: {
+      name: 'Бунгало',
+      minPrice: 0,
+    },
+    house: {
+      name: 'Дом',
+      minPrice: 5000,
+    },
+    palace: {
+      name: 'Дворец',
+      minPrice: 10000,
+    }
+  };
+
   var noticeBlock = document.querySelector('.notice');
   var noticeForm = noticeBlock.querySelector('.notice__form');
   var noticeFields = noticeForm.querySelectorAll('fieldset');
@@ -67,10 +87,10 @@
 
       var typeValues = [];
       var minPrices = [];
-      var offerTypes = window.data.OFFER_TYPES;
+      // var OFFER_TYPES = OFFER_TYPES;
       for (var i = 0; i < typeField.options.length; i++) {
         typeValues[i] = typeField.options[i].value;
-        minPrices[i] = offerTypes[typeValues[i]].minPrice;
+        minPrices[i] = OFFER_TYPES[typeValues[i]].minPrice;
       }
       window.synchronizeFields.synchronize(typeField, priceField, typeValues, minPrices, window.synchronizeFields.syncValuesMin);
 
