@@ -99,8 +99,20 @@
       });
 
       window.formValidation.submitValidForm();
-      resetForm.addEventListener('click', window.formReset.resetForm);
+      resetForm.addEventListener('click', window.forrm.reset);
       window.map.initialize();
+    },
+
+    reset: function () {
+      noticeForm.reset();
+      noticeForm.classList.add('notice__form--disabled');
+      deactivateNotice();
+      window.card.closePopup();
+      window.filter.resetFilters();
+      window.map.removePins();
+      window.map.mapFading();
+      window.map.setStartAddress();
+      window.form.setAddress();
     }
 
   };
