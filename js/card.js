@@ -13,7 +13,6 @@
     var featuresListPopup = mapCard.querySelector('.popup__features').cloneNode(true);
     var featuresListAll = featuresListPopup.querySelectorAll('.feature');
     for (var k = 0; k < featuresListAll.length; k++) {
-      featuresListAll[k].classList = '';
       if (k < hotel.offer.features.length) {
         featuresListAll[k].classList = 'feature feature--' + hotel.offer.features[k];
       } else {
