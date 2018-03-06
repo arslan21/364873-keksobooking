@@ -110,7 +110,7 @@
       window.card.closePopup();
       window.filter.resetFilters();
       window.map.removePins();
-      window.map.mapFading();
+      window.map.mapDeactivate();
       window.map.setStartAddress();
       window.form.setAddress();
     }

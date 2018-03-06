@@ -19,7 +19,7 @@
   }
 
   window.pin = {
-    renderPin: function (hotel) {
+    render: function (hotel) {
       var mapPin = templatePinButton.cloneNode(true);
       mapPin.setAttribute('style', 'left: ' + (hotel.location.x - 3) + 'px;' + 'top: ' + (hotel.location.y - buttonImage.height) + 'px;');
       mapPin.querySelector('img').setAttribute('src', hotel.author.avatar);

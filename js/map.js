@@ -83,7 +83,7 @@
       window.map.removePins();
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < sortedHotels.length; i++) {
-        var pinForInsert = window.pin.renderPin(sortedHotels[i]);
+        var pinForInsert = window.pin.render(sortedHotels[i]);
         fragment.appendChild(pinForInsert);
         if (i === 4) {
           break;
@@ -93,17 +93,16 @@
     },
 
     removePins: function () {
-      var mapPinsLength = mapPins.children.length;
-      for (var p = mapPinsLength; p > 0; p--) {
-        var pinClassList = mapPins.children[mapPinsLength - 1].classList.value;
-        if (pinClassList === 'map__pin' || pinClassList === 'map__pin map__pin--active') {
-          mapPins.children[mapPinsLength - 1].remove();
-          mapPinsLength--;
+      var pinsForRemove = mapPins.querySelectorAll('.map__pin');
+      pinsForRemove.forEach(function (pin) {
+        var pinClassList = pin.classList.value;
+        if (pinClassList !== 'map__pin map__pin--main') {
+          mapPins.removeChild(pin);
         }
-      }
+      });
     },
 
-    mapFading: function () {
+    mapDeactivate: function () {
       map.classList.add('map--faded');
     },
 
