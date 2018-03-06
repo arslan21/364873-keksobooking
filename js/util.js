@@ -46,9 +46,9 @@
 
     //  используется в filter.js
     debounce: function (func, time) {
-      var prevTimer;
-      window.clearTimeout(prevTimer);
-      prevTimer = window.setTimeout(func, time);
+      var timeotID;
+      window.clearTimeout(timeotID);
+      timeotID = window.setTimeout(func, time);
     }
 
   };
