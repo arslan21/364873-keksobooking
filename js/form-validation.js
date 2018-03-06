@@ -8,105 +8,100 @@
   var priceField = noticeForm.querySelector('#price');
   var capacityField = noticeForm.querySelector('#capacity');
 
+  var fields = {
+    address: {
+      name: addressField,
+      validator: addressFieldValidation
+    },
+    title: {
+      name: titleField,
+      validator: titleFieldValidation
+    },
+    price: {
+      name: priceField,
+      validator: priceFieldValidation
+    },
+    capacity: {
+      name: capacityField,
+      validator: capacityFieldValidation
+    },
+  };
+
   var submitForm = noticeForm.querySelector('.form__submit');
 
   // Валидация полей
   function titleFieldValidation() {
-    if (titleField.validity.tooShort) {
+    if (titleField.validity.tooShort || titleField.validity.tooLong || titleField.validity.valueMissing) {
+      return false;
+    } else {
       return true;
     }
-
-    if (titleField.validity.tooLong) {
-      return true;
-    }
-
-    if (titleField.validity.valueMissing) {
-      return true;
-    }
-    return false;
   }
 
   function priceFieldValidation() {
-    if (priceField.validity.rangeUnderflow) {
+    if (priceField.validity.rangeUnderflow || priceField.validity.rangeOverflow || priceField.validity.valueMissing) {
+      return false;
+    } else {
       return true;
     }
-
-    if (priceField.validity.rangeOverflow) {
-      return true;
-    }
-
-    if (priceField.validity.valueMissing) {
-      return true;
-    }
-    return false;
   }
 
   function addressFieldValidation() {
     if (addressField.value === '') {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
   function capacityFieldValidation() {
     if (capacityField.options[capacityField.selectedIndex].disabled) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
   //  Маркировка незаполненных полей
   function invalidFieldBordering(validationState, field) {
-    if (validationState) {
+    field.setAttribute('style', 'border-color: white');
+    if (!validationState()) {
       field.setAttribute('style', 'border-color: red');
-    } else {
-      field.removeAttribute('style');
     }
   }
 
   function invalidFieldsMarking() {
-    var titleFieldValidityState = titleFieldValidation();
-    invalidFieldBordering(titleFieldValidityState, titleField);
-
-    var priceFieldValidityState = priceFieldValidation();
-    invalidFieldBordering(priceFieldValidityState, priceField);
-
-    var addressFieldValidityState = addressFieldValidation();
-    invalidFieldBordering(addressFieldValidityState, addressField);
-
-    var capacityFieldValidityState = capacityFieldValidation();
-    invalidFieldBordering(capacityFieldValidityState, capacityField);
+    Object.keys(fields).forEach(function (field) {
+      invalidFieldBordering(fields[field].validator, fields[field].name);
+    });
   }
 
   //  проверка отправки формы
-
-  function submitingForm(evt) {
-    if (allFieldValidation()) {
-      evt.preventDefault();
-      invalidFieldsMarking();
-    }
-  }
-
   function allFieldValidation() {
-    if (titleFieldValidation() || priceFieldValidation() || addressFieldValidation() || capacityFieldValidation()) {
-      return true;
-    }
-    return false;
+    Object.keys(fields).forEach(function (field) {
+      if (fields[field].validator) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   window.formValidation = {
     submitValidForm: function () {
       // отправка формы
       noticeForm.addEventListener('submit', function (evt) {
-        window.backend.save(noticeForm, window.formReset.resetForm, window.errorMessage.show);
+        if (allFieldValidation()) {
+          invalidFieldsMarking();
+          evt.preventDefault();
+          window.backend.save(noticeForm, window.form.reset, window.errorMessage.show);
+        }
         evt.preventDefault();
       });
 
-      submitForm.addEventListener('click', function (evt) {
-        submitingForm(evt);
+      submitForm.addEventListener('click', function () {
+        invalidFieldsMarking();
       });
       submitForm.addEventListener('keydown', function (evt) {
-        window.util.isEnterEvent(evt, submitingForm);
+        window.util.isEnterEvent(evt, invalidFieldsMarking);
       });
     }
 
