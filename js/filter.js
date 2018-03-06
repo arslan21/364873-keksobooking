@@ -64,25 +64,16 @@
   window.filter = {
     activateFilters: function () {
       for (var i = 0; i < mapFilters.length; i++) {
-        mapFilters[i].addEventListener('change', function () {
-          window.backend.load(window.filter.loadData, window.errorMessage.show);
-        });
+        mapFilters[i].addEventListener('change', window.filter.getFilterValues);
       }
       for (var j = 0; j < mapChekboxes.length; j++) {
-        mapChekboxes[j].addEventListener('change', function () {
-          window.backend.load(window.filter.loadData, window.errorMessage.show);
-        });
+        mapChekboxes[j].addEventListener('change', window.filter.getFilterValues);
       }
-    },
-
-    loadData: function (hotelList) {
-      window.filter.data = hotelList;
-      window.filter.getFilterValues();
     },
 
     getFilterValues: function () {
       var sortedHotels = {};
-      var hotelList = window.filter.data;
+      var hotelList = window.map.data;
 
       var needHotelOffer = new NeedHotelOffer();
       sortedHotels = hotelList.filter(function (hotel) {

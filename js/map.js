@@ -55,11 +55,18 @@
     initialize: function () {
       dragPin();
       mapPinMain.addEventListener('mouseup', function (evt) {
-        map.classList.remove('map--faded');
-        window.backend.load(window.filter.loadData, window.errorMessage.show);
+        if (map.classList.contains('map--faded')) {
+          window.backend.load(window.map.activate, window.errorMessage.show);
+        }
         window.form.placeNotice(evt, window.map.getAddress());
         window.filter.activateFilters();
       });
+    },
+
+    activate: function (hotelList) {
+      map.classList.remove('map--faded');
+      window.map.data = hotelList;
+      window.filter.getFilterValues();
     },
 
     getAddress: function () {
