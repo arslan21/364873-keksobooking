@@ -87,12 +87,12 @@
         typeValues[i] = typeField.options[i].value;
         minPrices[i] = offerTypes[typeValues[i]].minPrice;
       }
-      window.synchronizeFields.synchronize(typeField, priceField, typeValues, minPrices, window.synchronizeFields.syncValuesMin);
+      window.synchronize.field(typeField, priceField, typeValues, minPrices, window.synchronize.syncValuesMin);
 
       var checkInValues = window.util.getValuesFromOptions(checkInField);
       var checkOutValues = window.util.getValuesFromOptions(checkOutField);
-      window.synchronizeFields.synchronize(checkInField, checkOutField, checkInValues, checkOutValues, window.synchronizeFields.syncValues);
-      window.synchronizeFields.synchronize(checkOutField, checkInField, checkOutValues, checkInValues, window.synchronizeFields.syncValues);
+      window.synchronize.field(checkInField, checkOutField, checkInValues, checkOutValues, window.synchronize.syncValues);
+      window.synchronize.field(checkOutField, checkInField, checkOutValues, checkInValues, window.synchronize.syncValues);
 
       roomNumberField.addEventListener('change', function () {
         disabelingCapacityOptions();

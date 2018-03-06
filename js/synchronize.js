@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  window.synchronizeFields = {
-    synchronize: function (element, syncElement, valuesArr, syncValuesArr, callback) {
+  window.synchronize = {
+    field: function (element, syncElement, valuesArr, syncValuesArr, callback) {
       element.addEventListener('change', function () {
         var syncValuesObj = {};
         for (var i = 0; i < valuesArr.length; i++) {
