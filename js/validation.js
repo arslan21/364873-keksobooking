@@ -27,7 +27,7 @@
     },
   };
 
-  var submitForm = noticeForm.querySelector('.form__submit');
+  var submitButton = noticeForm.querySelector('.form__submit');
 
   // Валидация полей
   function titleFieldValidation() {
@@ -92,15 +92,17 @@
         if (allFieldValidation()) {
           invalidFieldsMarking();
           evt.preventDefault();
+          debugger
+
           window.backend.save(noticeForm, window.form.reset, window.errorMessage.show);
         }
         evt.preventDefault();
       });
 
-      submitForm.addEventListener('click', function () {
+      submitButton.addEventListener('click', function () {
         invalidFieldsMarking();
       });
-      submitForm.addEventListener('keydown', function (evt) {
+      submitButton.addEventListener('keydown', function (evt) {
         window.util.isEnterEvent(evt, invalidFieldsMarking);
       });
     }

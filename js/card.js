@@ -9,6 +9,11 @@
   var mapPins = map.querySelector('.map__pins');
   var mapFiltersContainer = map.querySelector('.map__filters-container');
 
+  var cardImage = {
+    width: 50,
+    height: 50
+  };
+
   function getFeaturesListForPopup(hotel) {
     var featuresListPopup = mapCard.querySelector('.popup__features').cloneNode(true);
     var featuresListAll = featuresListPopup.querySelectorAll('.feature');
@@ -38,8 +43,8 @@
       var pictureTemplate = picture.cloneNode(true);
       var pictureImage = pictureTemplate.querySelector('img');
       pictureImage.src = offerPhoto;
-      pictureImage.width = 50;
-      pictureImage.height = 50;
+      pictureImage.width = cardImage.width;
+      pictureImage.height = cardImage.height;
       fragment.appendChild(pictureTemplate);
     });
     picturesList.appendChild(fragment);

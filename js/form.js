@@ -100,6 +100,7 @@
 
       window.validation.submitForm();
       resetForm.addEventListener('click', window.form.reset);
+      // resetForm.addEventListener('keydown', window.util.isEnterEvent(evt, window.form.reset));
       window.map.initialize();
     },
 
