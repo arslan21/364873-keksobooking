@@ -85,8 +85,8 @@
     });
   }
 
-  window.formValidation = {
-    submitValidForm: function () {
+  window.validation = {
+    submitForm: function () {
       // отправка формы
       noticeForm.addEventListener('submit', function (evt) {
         if (allFieldValidation()) {

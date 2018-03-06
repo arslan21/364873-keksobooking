@@ -98,7 +98,7 @@
         disabelingCapacityOptions();
       });
 
-      window.formValidation.submitValidForm();
+      window.validation.submitForm();
       resetForm.addEventListener('click', window.form.reset);
       window.map.initialize();
     },
