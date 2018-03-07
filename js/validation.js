@@ -76,27 +76,31 @@
 
   //  проверка отправки формы
   function allFieldValidation() {
-    Object.keys(fields).forEach(function (field) {
-      if (fields[field].validator) {
-        return true;
-      } else {
-        return false;
+    debugger
+    var validState;
+    for (var field in fields) {
+      if (fields.hasOwnProperty(field)) {
+        var validator = fields[field].validator;
+        if (validator()) {
+          validState = true;
+        } else {
+          validState = false;
+          break;
+        }
       }
-    });
+    }
+    return validState;
   }
 
   window.validation = {
     submitForm: function () {
       // отправка формы
       noticeForm.addEventListener('submit', function (evt) {
+        evt.preventDefault();
         if (allFieldValidation()) {
           invalidFieldsMarking();
-          evt.preventDefault();
-          debugger
-
           window.backend.save(noticeForm, window.form.reset, window.errorMessage.show);
         }
-        evt.preventDefault();
       });
 
       submitButton.addEventListener('click', function () {
